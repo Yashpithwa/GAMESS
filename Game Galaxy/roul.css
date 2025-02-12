@@ -1,0 +1,115 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body, html, .main {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+   
+	background: radial-gradient(circle at center, #000000, #2d0030, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cont{
+	width:500px;
+	height:500px;
+	background-color: #ccc;
+	border-radius:50%;
+	border:15px solid #dde;
+	position: relative;
+	overflow: hidden;
+	transition: 5s;
+}
+
+.cont div{
+	height:50%;
+	width:200px;
+	position: absolute;
+	clip-path: polygon(100% 0 , 50% 100% , 0 0 );
+	transform:translateX(-50%);
+	transform-origin:bottom;
+	text-align:center;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	font-size:20px;
+	font-weight:bold;
+	font-family:sans-serif;
+	color:#fff;
+	left:135px;
+}
+
+.cont .one {
+    background: linear-gradient(135deg, #ff00ff, #ff007f, #ff77ff);
+    left: 50%;
+}
+.cont .two {
+    background: linear-gradient(135deg, #ffbf00, #ff9100, #ffe680);
+    transform: rotate(45deg);
+}
+.cont .three {
+    background: linear-gradient(135deg, #ff007f, #ff0066, #ff6699);
+    transform: rotate(90deg);
+}
+.cont .four {
+    background: linear-gradient(135deg, #00ffbf, #00d9a6, #66ffe0);
+    transform: rotate(135deg);
+}
+.cont .five {
+    background: linear-gradient(135deg, #00bfff, #0099ff, #66d9ff);
+    transform: rotate(180deg);
+}
+.cont .six {
+    background: linear-gradient(135deg, #bf00ff, #d400ff, #d966ff);
+    transform: rotate(225deg);
+}
+.cont .seven {
+    background: linear-gradient(135deg, #7fff00, #4dff00, #b3ff66);
+    transform: rotate(270deg);
+}
+.cont .eigth {
+    background: linear-gradient(135deg, #ff0000, #ff3300, #ff6666);
+    transform: rotate(315deg);
+}
+
+.arrow{
+	position: absolute;
+	top:0;
+	left:50%;
+	transform: translateX(-50%);
+	color:#fff;
+}
+
+.arrow::before{
+	content:"\1F817";
+	font-size:50px;
+}
+
+#spin{
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	z-index:10;
+	background-color: #e2e2e2;
+	text-transform: uppercase;
+	border:8px solid #fff;
+	font-weight:bold;
+	font-size:20px;
+	color:#a2a2a2;
+	width: 80px;
+	height:80px;
+	font-family: sans-serif;
+	border-radius:50%;
+	cursor: pointer;
+	outline:none;
+	letter-spacing: 1px;
+}

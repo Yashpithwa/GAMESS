@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Ball</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle, #4d0026, #2b0019, #000000); /* Deep red to black gradient */
+            color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bigball {
+            height: 350px;
+            width: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff004d, #80002a); /* Glowing red effect */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 50px 20px #ff004d, 0 0 30px 15px #80002a inset; /* Outer and inner glow */
+            animation: pulse 2s infinite; /* Glowing pulse animation */
+        }
+
+        .smallball {
+            height: 70%;
+            width: 70%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff3377, #990033);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px 10px #ff004d inset; /* Inner glow */
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 50px 20px #ff004d, 0 0 30px 15px #80002a inset;
+            }
+            50% {
+                box-shadow: 0 0 70px 30px #ff3377, 0 0 40px 20px #990033 inset;
+            }
+        }
+
+        .textinput {
+            height: 50px;
+            width: 300px;
+            border: 2px solid #ff004d;
+            border-radius: 25px;
+            text-align: center;
+            background-color: #260013;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .textinput::placeholder {
+            color: #ff99bb;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #ff004d, #80002a);
+            color: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff3377, #990033);
+            transform: scale(1.1);
+        }
+
+        #confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ff004d;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bigball">
+            <div class="smallball" id="smallball">Magic Ball</div>
+        </div>
+        <input type="text" class="textinput" id="textinput" placeholder="Ask your question">
+        <button id="celebrateButton">Reveal Answer</button>
+    </div>
+
+    <div id="confetti"></div>
+
+    <script>
+        let confettiTriggered = false;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("celebrateButton").addEventListener('click', function() {
+                triggerCelebrationEffect();
+            });
+        });
+
+        function triggerCelebrationEffect() {
+            if (!confettiTriggered) {
+                confettiTriggered = true;
+                for (let i = 0; i < 150; i++) {
+                    let confettiPiece = document.createElement('div');
+                    confettiPiece.classList.add('confetti-piece');
+                    document.getElementById('confetti').appendChild(confettiPiece);
+                    confettiPiece.style.left = `${Math.random() * 100}%`;
+                    confettiPiece.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                    confettiPiece.style.animationDelay = `${Math.random() * 0.5}s`;
+                }
+            }
+
+            let inputValue = document.getElementById("textinput").value;
+            let change = document.getElementById("smallball");
+
+            if (inputValue) {
+                const answer = [
+                    "Yes, without a doubt!",
+                    "No, absolutely not!",
+                    "Ask again later.",
+                    "Most likely, yes.",
+                    "Don’t count on it.",
+                    "Definitely yes.",
+                    "Highly unlikely.",
+                    "Absolutely!",
+                    "Try again soon.",
+                    "Maybe, but be cautious."
+                ];
+
+                let random = answer[Math.floor(Math.random() * answer.length)];
+                change.innerText = random;
+
+            } else {
+                change.innerText = "Enter your question!";
+            }
+        }
+    </script>
+</body>
+</html>

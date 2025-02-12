@@ -1,0 +1,91 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    height: 100%;
+    width: 100%;
+    background-color: palegreen;
+    overflow: hidden;
+}
+.main {
+    height: 100vh;
+    width: 100%;
+    background-image: url(aakx_usr5_220301.jpg);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+.welcome {
+    font-size: xx-large;
+    text-align: center;
+    color: red;
+    padding-top: 40px;
+}
+#score {
+    font-size: 25px;
+    color: #54212f;
+    font-weight: bold;
+    position: absolute;
+    right: 45px;
+    top: 31px;
+    border: 2px solid black;
+    padding: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 10px;
+}
+.car {
+   
+    height: 100px;
+    width: 190px;
+    bottom: 200px;
+    background-image: url(gadi.png);
+    background-size: cover;
+    
+    
+    left: 150px;
+    position: absolute;
+    
+}
+.obs {
+    
+    background-image: url(cone-6558866_640\ \(1\).png);
+
+    height: 50px;
+    width: 60px;
+    bottom: 200px;
+    position: absolute;
+    left: 450px;
+    
+}
+
+/* Car Jump Animation */
+.anicar {
+    animation: anicar 0.6s linear; /* Fixed animation name */
+}
+
+@keyframes anicar {
+    0% {
+        bottom: 200px;
+    }
+    50% {
+        bottom: 400px;
+    }
+    100% {
+        bottom: 200px;
+    }
+}
+
+/* Obstacle Movement Animation */
+.aniobs {
+    animation: aniobs 5s linear infinite; /* Fixed class name */
+}
+
+@keyframes aniobs {
+    0% {
+        left: 100vw;  /* Start from outside the right edge of the screen */
+    }
+    100% {
+        left: -10vw;  /* Move to outside the left edge of the screen */
+    }
+}

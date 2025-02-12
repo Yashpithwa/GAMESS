@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="xo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="panel">
+    <div class="exitbutton">
+      
+      <div class="winnertext">
+        
+      </div>
+
+
+    
+    </div>
+    <div class="game">
+      <div class="box">
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+        <div class="boxes"></div>
+      </div>
+    </div>
+    <div class="restandcount">
+     <button class="reset">
+       RESET
+     </button>
+    </div>
+  </div>
+  <script>
+    let boxes = document.querySelectorAll(".boxes");
+let resetBtn = document.querySelector(".reset");
+let msgContainer = document.querySelector(".winnertext"); // Ensure this is uncommented to avoid errors
+let msg = document.querySelector(".winnertext");
+
+let turnO = true; // Player O starts first
+let count = 0; // To track the number of turns
+
+const winPatterns = [
+  [0, 1, 2],
+  [0, 3, 6],
+  [0, 4, 8],
+  [1, 4, 7],
+  [2, 5, 8],
+  [2, 4, 6],
+  [3, 4, 5],
+  [6, 7, 8],
+];
+
+// Function to reset the game
+function resetGame() {
+  turnO = true; // Reset turn to Player O
+  count = 0; // Reset the count
+  enableBoxes(); // Enable all boxes for a new game
+  msgContainer.classList.add("hide"); // Hide the message container
+}
+
+// Function to check for a winner
+function checkWinner() {
+  for (let pattern of winPatterns) {
+    let pos1Val = boxes[pattern[0]].innerText;
+    let pos2Val = boxes[pattern[1]].innerText;
+    let pos3Val = boxes[pattern[2]].innerText;
+
+    if (pos1Val !== "" && pos2Val !== "" && pos3Val !== "") {
+      if (pos1Val === pos2Val && pos2Val === pos3Val) {
+        showWinner(pos1Val); // Call function to show the winner
+        return true; // Return true indicating a winner was found
+      }
+    }
+  }
+  return false; // No winner found
+}
+
+// Function to display the winner
+function showWinner(winner) {
+  msg.innerText = `Congratulations, Winner is ${winner}`;
+  msgContainer.classList.remove("hide"); // Show the message container
+  disableBoxes(); // Disable all boxes
+}
+
+// Function to handle a draw
+function gameDraw() {
+  msg.innerText = `Game was a Draw.`;
+  msgContainer.classList.remove("hide"); // Show the message container
+  disableBoxes(); // Disable all boxes
+}
+
+// Function to disable all boxes
+function disableBoxes() {
+  for (let box of boxes) {
+    box.disabled = true; // Disable each box
+  }
+}
+
+// Function to enable all boxes
+function enableBoxes() {
+  for (let box of boxes) {
+    box.disabled = false; // Enable each box
+    box.innerText = ""; // Clear the text in each box
+  }
+}
+
+// Add event listeners to each box
+boxes.forEach(function(box) {
+  box.addEventListener("click", function() {
+    if (turnO) {
+      // Player O's turn
+      box.innerText = "O";
+      turnO = false; // Switch to Player X
+    } else {
+      // Player X's turn
+      box.innerText = "X";
+      turnO = true; // Switch to Player O
+    }
+    box.disabled = true; // Disable the clicked box
+    count++; // Increment the turn count
+
+    // Check for a winner
+    let isWinner = checkWinner();
+
+    // Check for a draw if no winner found
+    if (count === 9 && !isWinner) {
+      gameDraw();
+    }
+  });
+});
+
+// Add event listener for the reset button
+resetBtn.addEventListener("click", resetGame);
+
+  </script>
+</body>
+</html>
